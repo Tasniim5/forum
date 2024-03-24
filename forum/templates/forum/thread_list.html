@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p&display=swap" rel="stylesheet">
+    
+</head>
+
+<body>
+    <header>
+        <!--NavBar Section-->
+        <div class="navbar">
+            <nav class="navigation hide" id="navigation">
+                <span class="close-icon" id="close-icon" onclick="showIconBar()"><i class="fa fa-close"></i></span>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="forums.html">Log In</a></li>
+                    <li class="nav-item"><a href="posts.html">Sign Up</a></li>
+                   
+                </ul>
+            </nav>
+            <a class="bar-icon" id="iconBar" onclick="hideIconBar()"><i class="fa fa-bars"></i></a>
+          
+            <a href="index.html" style="text-decoration: none; color: inherit;">
+                <div class="brand" style="font-family: 'M PLUS 1p', sans-serif; color: darkgreen;">GreenIt</div>
+            </a>
+        </div>
+        <!--Add Thread Section-->
+        <a href="create_post.html" class="new-thread-btn" id="newThreadBtn">New Thread</a>
+    </header>
+
+  <div class="container" id="postsContainer">
+    <div class="forum">
+      <div class="forum-title">
+        <h1>General Information</h1>
+      </div>
+      {% for thread in object_list %}
+      <div class="forum-row">
+        <div class="forum-icon forum-column center">
+          <i class="fa fa-book center"></i>
+        </div>
+        <div class="forum-description forum-column">
+          <h4><a href="{{ thread.get_absolute_url }}">{{ thread.title }}</a></h4>
+          <p>{{ thread.created_at }}</p>
+        </div>
+        <div class="forum-stats forum-column center">
+          <span>24 Posts | 12 Topics</span>
+        </div>
+        <div class="forum-info forum-column">
+          <b><a href="">Last post</a></b> by <a href="">JustAUser</a> 
+          <br>on <small>12 Dec 2020</small>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Forum Info -->
+    <div class="forum-info">
+      <div class="chart">
+        GreenIt - Stats &nbsp;<i class="fa fa-bar-chart"></i>
+      </div>
+      <span><u>5,369</u> Posts in <u>48</u> Topics by <u>8,124</u> Members.</span><br>
+      <span>Latest post: <b><a href="">Random post</a></b> on Dec 15 2021 By <a href="">RandomUser</a></span>.<br>
+      <span>Check <a href="">the latest posts</a> .</span><br>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+{% load static %} <script src="{% static 'main.js' %}"></script>
+{% endblock %}
